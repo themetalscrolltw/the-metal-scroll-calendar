@@ -1,0 +1,17 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # 每 4 天的台灣時間早上 10:00 自動執行一次
+    - cron: '0 2 */4 * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+          -H "apikey: sb_publishable_K7iIa_1ztydOrYUrO465DA_nqwN_K_6" \
+          "https://ybbwdtndrnnvfkeiclji.supabase.co/rest/v1/mp_events?select=id&limit=1"
